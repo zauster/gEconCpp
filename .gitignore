@@ -1,0 +1,5 @@
+*.o
+*/*.o
+*/*/*.o
+/R_gEcon_oldConfigs
+/gEconModelParser
