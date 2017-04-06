@@ -3,3 +3,7 @@
 */*/*.o
 /R_gEcon_oldConfigs
 /gEconModelParser
+test/*.test
+test/*.tex
+test/*.log
+test/*.R

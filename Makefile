@@ -167,3 +167,17 @@ link: $(OBJECTS)
 
 clean:
 	-@rm $(OBJECTS)
+
+test: gEconModelParser
+	@./gEconModelParser test/cge_calibr_iosam.gcn
+	tail -n +2 test/cge_calibr_iosam.model.tex > test/cge_calibr_iosam.model.tex.test
+	diff test/cge_calibr_iosam.model.tex.test test/cge_calibr_iosam.model.tex.true
+	tail -n +2 test/cge_calibr_iosam.model.log > test/cge_calibr_iosam.model.log.test
+	diff test/cge_calibr_iosam.model.log.test test/cge_calibr_iosam.model.log.true
+	tail -n +9 test/cge_calibr_iosam.model.R > test/cge_calibr_iosam.model.R.test
+	diff test/cge_calibr_iosam.model.R.test test/cge_calibr_iosam.model.R.true
+	tail -n +2 test/cge_calibr_iosam.results.tex > test/cge_calibr_iosam.results.tex.test
+	diff test/cge_calibr_iosam.results.tex.test test/cge_calibr_iosam.results.tex.true
+
+# tail -n +2 test/cge_calibr_iosam.tex > test/cge_calibr_iosam.tex.test
+# diff test/cge_calibr_iosam.tex.test test/cge_calibr_iosam.tex.true
