@@ -1,0 +1,118 @@
+# ###########################################################################
+# Authors: Oliver Reiter
+# ###########################################################################
+# (Multi-Country) CGE model with CES production function
+# ###########################################################################
+
+
+options
+{
+    output R = TRUE;
+    output LaTeX = TRUE;
+    output LaTeX landscape = TRUE;
+    output logfile = TRUE;
+};
+
+indexsets
+{
+    SECTORS = { 'A' .. 'G' };
+    CONSUMERS = { '1' .. '3' };
+    ## COUNTRIES = { 'AUT' };
+    COUNTRIES = { 'AUT' , 'DEU', 'FRA', 'GBR', 'SVN', 'USA'};
+};
+
+block <i::COUNTRIES> <h::CONSUMERS> CONSUMER
+{
+    definitions
+    {
+        u<i, h>[] = (SUM<s::SECTORS>(alpha<i, s, h> * D<i, s, h>[]^((omega - 1)/omega)))^(omega/(omega - 1));
+    };
+    controls
+    {
+        <s::SECTORS>D<i, s, h>[]; # Household h demand for good s
+    };
+    objective
+    {
+        U<i, h>[] = u<i, h>[];
+    };
+    constraints
+    {
+        INC<i, h>[] + PI<i, h>[] = SUM<s::SECTORS>(D<i, s, h>[] * p<i, s>[]);
+    };
+    identities
+    {
+        INC<i, h>[] = K<i, h>[] * p_k[] + L<i, h>[];
+        K<i, h>[] = ks_data<i, h>;
+        L<i, h>[] = ls_data<i, h>;
+    };
+    calibration
+    {
+        <s::SECTORS\'A'>D<i, s, h>[] = d_data<i, s, h> -> alpha<i, s, h>;
+        SUM<s::SECTORS>(alpha<i, s, h>^omega) = 1 -> alpha<i, 'A', h>;
+    };
+};
+
+
+
+block <i::COUNTRIES> <s::SECTORS> FIRM
+{
+    controls
+    {
+        Y<i, s>[], K<i, s>[], L<i, s>[], <si::SECTORS>X<i, si, s>[];
+    };
+    objective
+    {
+        pi<i, s>[] = Y<i, s>[] * p<i, s>[] - (K<i, s>[] * p_k[] + L<i, s>[]) - SUM<si::SECTORS>(X<i, si, s>[] * p<i, si>[]);
+    };
+    constraints
+    {
+        ## original Cobb-Douglas
+        ## Y<i, s>[] = gamma<i, s> * K<i, s>[]^beta_k<i, s> * L<i, s>[]^beta_l<i, s> * PROD<si::SECTORS>(X<i, si, s>[]^beta_x<i, si, s>);
+
+        ## CES function over all factors of production
+        ## Y<i, s>[] = gamma<i, s> * (beta_k<i, s> * K<i, s>[]^rho + beta_l<i, s> * L<i, s>[]^rho + SUM<si::SECTORS>(beta_x<i, si, s> * X<i, si, s>[]^rho))^(rts / rho);
+
+        ## Cobb-Douglas with nested CES function over all factors of
+        ## production
+        Y<i, s>[] = gamma<i, s> * (K<i, s>[]^eta_k<i, s> * L<i, s>[]^eta_l<i, s> *
+        (SUM<si::SECTORS>(beta_x<i, si, s> * X<i, si, s>[]^rho<i>))^(eta_x<i, s> / rho<i>));
+        
+    };
+    calibration
+    {
+        ## CD and CES:
+        ## beta_k<i, s> + beta_l<i, s> + SUM<si::SECTORS>(beta_x<si, s>) = 1 -> beta_k<i, s>;
+        ## L<i, s>[] = l_data<i, s> -> beta_l<i, s>;
+        ## <si::SECTORS>X<i, si, s>[] = x_data<i, si, s> -> beta_x<i, si, s>;
+        ## Y<i, s>[] = y_data<i, s> -> gamma<i, s>;
+        ## rts = 1;
+        ## rho = 2;
+
+        ## CD and nested CES:
+        ## X<i, s, s>[] = x_data<i, s, s>;
+        <si::SECTORS\s>X<i, si, s>[] = x_data<i, si, s> -> beta_x<i, si, s>;
+        SUM<si::SECTORS>(beta_x<i, si, s>) = 1 -> beta_x<i, s, s>;
+        
+        K<i, s>[] = k_data<i, s> -> eta_k<i, s>;
+        L<i, s>[] = l_data<i, s> -> eta_l<i, s>;
+        eta_k<i, s> + eta_l<i, s> + eta_x<i, s> = 1 -> eta_x<i, s>;
+
+        Y<i, s>[] = y_data<i, s> -> gamma<i, s>;
+        ## rho<i> = 2;
+    };
+};
+
+block EQUILIBRIUM
+{
+    identities
+    {
+        <i::COUNTRIES> SUM<h::CONSUMERS>(K<i, h>[]) = SUM<s::SECTORS>(K<i, s>[]);
+        <s::SECTORS>p<'AUT', s>[] = 1;
+        <i::COUNTRIES\'AUT'> <s::SECTORS\'A'>p<i, s>[] = 1;
+        <i::COUNTRIES> <h::CONSUMERS>PI<i, h>[] = SUM<s::SECTORS>(pi<i, s>[]) * pi_h<i, h>;
+    };
+    calibration
+    {
+        <i::COUNTRIES> SUM<h::CONSUMERS>(pi_h<i, h>) = 1 -> pi_h<i, '1'>;
+    }
+};

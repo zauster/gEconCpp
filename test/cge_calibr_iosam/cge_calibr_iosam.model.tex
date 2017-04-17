@@ -1,0 +1,577 @@
+% Generated on 2017-04-15 09:48:21 by gEcon ver. 1.0.2 (2016-12-05)
+% http://gecon.r-forge.r-project.org/
+
+% Model name: cge_calibr_iosam
+
+\section*{Index sets}
+
+$${H\!H} = \{ \mathrm{p1}, \mathrm{p2}, \mathrm{p3}, \mathrm{p4}, \mathrm{p5}, \mathrm{p6} \}$$
+$${S\!E\!C} = \{ \mathrm{A}, \mathrm{B}, \mathrm{C}, \mathrm{D}, \mathrm{E}, \mathrm{F}, \mathrm{G}, \mathrm{H} \}$$
+
+\section{CONSUMER $h\in {H\!H}$}
+
+\subsection{Optimisation problem}
+
+\begin{align}
+&\max_{\left({D}^{\langle s,h\rangle}\right)_{s\in {S\!E\!C}}
+} {U}^{\langle h\rangle} = \left(\sum_{s\in {S\!E\!C}} {{\alpha}^{\langle s,h\rangle}} {{{D}^{\langle s,h\rangle}}^{{\omega}^{-1} \left(-1 + \omega\right)}}\right)^{{\omega} \left(-1 + \omega\right)^{-1}}\\
+&\mathrm{s.t.:}\nonumber\\
+& {{I\!N\!C}}^{\langle h\rangle} + {\Pi}^{\langle h\rangle} = \sum_{s\in {S\!E\!C}} {{p}^{\langle s\rangle}} {{D}^{\langle s,h\rangle}} \quad \left({\lambda^{\mathrm{CONSUMER}^{\mathrm{1}}}}^{\langle h\rangle}\right)
+\end{align}
+
+
+\subsection{Identities}
+
+\begin{equation}
+{{I\!N\!C}}^{\langle h\rangle} = {L}^{\langle h\rangle} + {p^{\mathrm{k}}} {{K}^{\langle h\rangle}}
+\end{equation}
+\begin{equation}
+{K}^{\langle h\rangle} = {{k\!s}^{\mathrm{data}}}^{\langle h\rangle}
+\end{equation}
+\begin{equation}
+{L}^{\langle h\rangle} = {{l\!s}^{\mathrm{data}}}^{\langle h\rangle}
+\end{equation}
+
+
+\subsection{First order conditions}
+
+\begin{equation}
+s\in {S\!E\!C}\colon\quad {{\lambda^{\mathrm{CONSUMER}^{\mathrm{1}}}}^{\langle h\rangle}} {{p}^{\langle s\rangle}} + {{\alpha}^{\langle s,h\rangle}} {{{D}^{\langle s,h\rangle}}^{-1 + {\omega}^{-1} \left(-1 + \omega\right)}} {\left(\sum_{s\in {S\!E\!C}} {{\alpha}^{\langle s,h\rangle}} {{{D}^{\langle s,h\rangle}}^{{\omega}^{-1} \left(-1 + \omega\right)}}\right)^{-1 + {\omega} \left(-1 + \omega\right)^{-1}}} = 0
+ \quad \left({D}^{\langle s,h\rangle}\right)
+\end{equation}
+
+
+
+
+\section{SECTOR $s\in {S\!E\!C}$}
+
+\subsection{Optimisation problem}
+
+\begin{align}
+&\max_{{Y}^{\langle s\rangle}, {K}^{\langle s\rangle}, {L}^{\langle s\rangle}, \left({X}^{\langle {s\!i},s\rangle}\right)_{{s\!i}\in {S\!E\!C}}
+} {\pi}^{\langle s\rangle} = -{L}^{\langle s\rangle} - {p^{\mathrm{k}}} {{K}^{\langle s\rangle}} + {{p}^{\langle s\rangle}} {{Y}^{\langle s\rangle}} - \sum_{{s\!i}\in {S\!E\!C}} {{p}^{\langle {s\!i}\rangle}} {{X}^{\langle {s\!i},s\rangle}}\\
+&\mathrm{s.t.:}\nonumber\\
+& {Y}^{\langle s\rangle} = {{\gamma}^{\langle s\rangle}} {{{K}^{\langle s\rangle}}^{{\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{{\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}\in {S\!E\!C}} {{X}^{\langle {s\!i},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}}\right) \quad \left({\lambda^{\mathrm{SECTOR}^{\mathrm{1}}}}^{\langle s\rangle}\right)
+\end{align}
+
+
+\subsection{First order conditions}
+
+\begin{equation}
+-{\lambda^{\mathrm{SECTOR}^{\mathrm{1}}}}^{\langle s\rangle} + {p}^{\langle s\rangle} = 0
+ \quad \left({Y}^{\langle s\rangle}\right)
+\end{equation}
+\begin{equation}
+-p^{\mathrm{k}} + {{\beta^{\mathrm{k}}}^{\langle s\rangle}} {{\gamma}^{\langle s\rangle}} {{\lambda^{\mathrm{SECTOR}^{\mathrm{1}}}}^{\langle s\rangle}} {{{K}^{\langle s\rangle}}^{-1 + {\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{{\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}\in {S\!E\!C}} {{X}^{\langle {s\!i},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}}\right) = 0
+ \quad \left({K}^{\langle s\rangle}\right)
+\end{equation}
+\begin{equation}
+-1 + {{\beta^{\mathrm{l}}}^{\langle s\rangle}} {{\gamma}^{\langle s\rangle}} {{\lambda^{\mathrm{SECTOR}^{\mathrm{1}}}}^{\langle s\rangle}} {{{K}^{\langle s\rangle}}^{{\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{-1 + {\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}\in {S\!E\!C}} {{X}^{\langle {s\!i},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}}\right) = 0
+ \quad \left({L}^{\langle s\rangle}\right)
+\end{equation}
+\begin{equation}
+{s\!i}\in {S\!E\!C}\colon\quad -{p}^{\langle {s\!i}\rangle} + {{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}} {{\gamma}^{\langle s\rangle}} {{\lambda^{\mathrm{SECTOR}^{\mathrm{1}}}}^{\langle s\rangle}} {{X}^{\langle {s\!i},s\rangle}}^{-1} {{{K}^{\langle s\rangle}}^{{\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{{\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}^{\prime}\in {S\!E\!C}} {{X}^{\langle {s\!i}^{\prime},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i}^{\prime},s\rangle}}\right) = 0
+ \quad \left({X}^{\langle {s\!i},s\rangle}\right)
+\end{equation}
+
+
+\subsection{First order conditions after reduction}
+
+\begin{equation}
+-p^{\mathrm{k}} + {{\beta^{\mathrm{k}}}^{\langle s\rangle}} {{\gamma}^{\langle s\rangle}} {{p}^{\langle s\rangle}} {{{K}^{\langle s\rangle}}^{-1 + {\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{{\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}\in {S\!E\!C}} {{X}^{\langle {s\!i},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}}\right) = 0
+ \quad \left({K}^{\langle s\rangle}\right)
+\end{equation}
+\begin{equation}
+-1 + {{\beta^{\mathrm{l}}}^{\langle s\rangle}} {{\gamma}^{\langle s\rangle}} {{p}^{\langle s\rangle}} {{{K}^{\langle s\rangle}}^{{\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{-1 + {\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}\in {S\!E\!C}} {{X}^{\langle {s\!i},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}}\right) = 0
+ \quad \left({L}^{\langle s\rangle}\right)
+\end{equation}
+\begin{equation}
+{s\!i}\in {S\!E\!C}\colon\quad -{p}^{\langle {s\!i}\rangle} + {{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}} {{\gamma}^{\langle s\rangle}} {{p}^{\langle s\rangle}} {{X}^{\langle {s\!i},s\rangle}}^{-1} {{{K}^{\langle s\rangle}}^{{\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{{\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}^{\prime}\in {S\!E\!C}} {{X}^{\langle {s\!i}^{\prime},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i}^{\prime},s\rangle}}\right) = 0
+ \quad \left(\left({X}^{\langle {s\!i},s\rangle}\right)_{{s\!i}\in {S\!E\!C}}\right)
+\end{equation}
+
+
+
+
+\section{EQUILIBRIUM}
+
+\subsection{Identities}
+
+\begin{equation}
+\sum_{h\in {H\!H}} {K}^{\langle h\rangle} = \sum_{s\in {S\!E\!C}} {K}^{\langle s\rangle}
+\end{equation}
+\begin{equation}
+s\in {S\!E\!C}\colon\quad {p}^{\langle s\rangle} = 1
+\end{equation}
+\begin{equation}
+h\in {H\!H}\colon\quad {\Pi}^{\langle h\rangle} = {{\pi^{\mathrm{h}}}^{\langle h\rangle}} \left(\sum_{s\in {S\!E\!C}} {\pi}^{\langle s\rangle}\right)
+\end{equation}
+
+
+
+
+\section{Equilibrium relationships (before expansion and reduction)}
+
+\begin{equation}
+-\sum_{h\in {H\!H}} {K}^{\langle h\rangle} + \sum_{s\in {S\!E\!C}} {K}^{\langle s\rangle} = 0
+\end{equation}
+\begin{equation}
+h\in {H\!H}\colon\quad {{k\!s}^{\mathrm{data}}}^{\langle h\rangle} - {K}^{\langle h\rangle} = 0
+\end{equation}
+\begin{equation}
+h\in {H\!H}\colon\quad {{l\!s}^{\mathrm{data}}}^{\langle h\rangle} - {L}^{\langle h\rangle} = 0
+\end{equation}
+\begin{equation}
+h\in {H\!H}\colon\quad -{\Pi}^{\langle h\rangle} + {{\pi^{\mathrm{h}}}^{\langle h\rangle}} \left(\sum_{s\in {S\!E\!C}} {\pi}^{\langle s\rangle}\right) = 0
+\end{equation}
+\begin{equation}
+h\in {H\!H}\colon\quad {U}^{\langle h\rangle} - \left(\sum_{s\in {S\!E\!C}} {{\alpha}^{\langle s,h\rangle}} {{{D}^{\langle s,h\rangle}}^{{\omega}^{-1} \left(-1 + \omega\right)}}\right)^{{\omega} \left(-1 + \omega\right)^{-1}} = 0
+\end{equation}
+\begin{equation}
+h\in {H\!H}\colon\quad -{{I\!N\!C}}^{\langle h\rangle} + {L}^{\langle h\rangle} + {p^{\mathrm{k}}} {{K}^{\langle h\rangle}} = 0
+\end{equation}
+\begin{equation}
+h\in {H\!H}\colon\quad -{{I\!N\!C}}^{\langle h\rangle} - {\Pi}^{\langle h\rangle} + \sum_{s\in {S\!E\!C}} {{p}^{\langle s\rangle}} {{D}^{\langle s,h\rangle}} = 0
+\end{equation}
+\begin{equation}
+h\in {H\!H}\colon\quad s\in {S\!E\!C}\colon\quad {{\lambda^{\mathrm{CONSUMER}^{\mathrm{1}}}}^{\langle h\rangle}} {{p}^{\langle s\rangle}} + {{\alpha}^{\langle s,h\rangle}} {{{D}^{\langle s,h\rangle}}^{-1 + {\omega}^{-1} \left(-1 + \omega\right)}} {\left(\sum_{s\in {S\!E\!C}} {{\alpha}^{\langle s,h\rangle}} {{{D}^{\langle s,h\rangle}}^{{\omega}^{-1} \left(-1 + \omega\right)}}\right)^{-1 + {\omega} \left(-1 + \omega\right)^{-1}}} = 0
+\end{equation}
+\begin{equation}
+s\in {S\!E\!C}\colon\quad -1 + {{\beta^{\mathrm{l}}}^{\langle s\rangle}} {{\gamma}^{\langle s\rangle}} {{p}^{\langle s\rangle}} {{{K}^{\langle s\rangle}}^{{\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{-1 + {\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}\in {S\!E\!C}} {{X}^{\langle {s\!i},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}}\right) = 0
+\end{equation}
+\begin{equation}
+s\in {S\!E\!C}\colon\quad 1 - {p}^{\langle s\rangle} = 0
+\end{equation}
+\begin{equation}
+s\in {S\!E\!C}\colon\quad -p^{\mathrm{k}} + {{\beta^{\mathrm{k}}}^{\langle s\rangle}} {{\gamma}^{\langle s\rangle}} {{p}^{\langle s\rangle}} {{{K}^{\langle s\rangle}}^{-1 + {\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{{\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}\in {S\!E\!C}} {{X}^{\langle {s\!i},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}}\right) = 0
+\end{equation}
+\begin{equation}
+s\in {S\!E\!C}\colon\quad -{Y}^{\langle s\rangle} + {{\gamma}^{\langle s\rangle}} {{{K}^{\langle s\rangle}}^{{\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{{\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}\in {S\!E\!C}} {{X}^{\langle {s\!i},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}}\right) = 0
+\end{equation}
+\begin{equation}
+s\in {S\!E\!C}\colon\quad {\pi}^{\langle s\rangle} + {L}^{\langle s\rangle} + {p^{\mathrm{k}}} {{K}^{\langle s\rangle}} - {{p}^{\langle s\rangle}} {{Y}^{\langle s\rangle}} + \sum_{{s\!i}\in {S\!E\!C}} {{p}^{\langle {s\!i}\rangle}} {{X}^{\langle {s\!i},s\rangle}} = 0
+\end{equation}
+\begin{equation}
+s\in {S\!E\!C}\colon\quad {s\!i}\in {S\!E\!C}\colon\quad -{p}^{\langle {s\!i}\rangle} + {{\beta^{\mathrm{x}}}^{\langle {s\!i},s\rangle}} {{\gamma}^{\langle s\rangle}} {{p}^{\langle s\rangle}} {{X}^{\langle {s\!i},s\rangle}}^{-1} {{{K}^{\langle s\rangle}}^{{\beta^{\mathrm{k}}}^{\langle s\rangle}}} {{{L}^{\langle s\rangle}}^{{\beta^{\mathrm{l}}}^{\langle s\rangle}}} \left(\prod_{{s\!i}^{\prime}\in {S\!E\!C}} {{X}^{\langle {s\!i}^{\prime},s\rangle}}^{{\beta^{\mathrm{x}}}^{\langle {s\!i}^{\prime},s\rangle}}\right) = 0
+\end{equation}
+
+
+
+\section{Calibrating equations}
+
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p1}}\rangle} + {D}^{\langle \mathrm{B},\mathrm{p1}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p2}}\rangle} + {D}^{\langle \mathrm{B},\mathrm{p2}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p3}}\rangle} + {D}^{\langle \mathrm{B},\mathrm{p3}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p4}}\rangle} + {D}^{\langle \mathrm{B},\mathrm{p4}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p5}}\rangle} + {D}^{\langle \mathrm{B},\mathrm{p5}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p6}}\rangle} + {D}^{\langle \mathrm{B},\mathrm{p6}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p1}}\rangle} + {D}^{\langle \mathrm{C},\mathrm{p1}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p2}}\rangle} + {D}^{\langle \mathrm{C},\mathrm{p2}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p3}}\rangle} + {D}^{\langle \mathrm{C},\mathrm{p3}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p4}}\rangle} + {D}^{\langle \mathrm{C},\mathrm{p4}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p5}}\rangle} + {D}^{\langle \mathrm{C},\mathrm{p5}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p6}}\rangle} + {D}^{\langle \mathrm{C},\mathrm{p6}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p1}}\rangle} + {D}^{\langle \mathrm{D},\mathrm{p1}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p2}}\rangle} + {D}^{\langle \mathrm{D},\mathrm{p2}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p3}}\rangle} + {D}^{\langle \mathrm{D},\mathrm{p3}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p4}}\rangle} + {D}^{\langle \mathrm{D},\mathrm{p4}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p5}}\rangle} + {D}^{\langle \mathrm{D},\mathrm{p5}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p6}}\rangle} + {D}^{\langle \mathrm{D},\mathrm{p6}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p1}}\rangle} + {D}^{\langle \mathrm{E},\mathrm{p1}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p2}}\rangle} + {D}^{\langle \mathrm{E},\mathrm{p2}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p3}}\rangle} + {D}^{\langle \mathrm{E},\mathrm{p3}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p4}}\rangle} + {D}^{\langle \mathrm{E},\mathrm{p4}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p5}}\rangle} + {D}^{\langle \mathrm{E},\mathrm{p5}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p6}}\rangle} + {D}^{\langle \mathrm{E},\mathrm{p6}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p1}}\rangle} + {D}^{\langle \mathrm{F},\mathrm{p1}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p2}}\rangle} + {D}^{\langle \mathrm{F},\mathrm{p2}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p3}}\rangle} + {D}^{\langle \mathrm{F},\mathrm{p3}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p4}}\rangle} + {D}^{\langle \mathrm{F},\mathrm{p4}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p5}}\rangle} + {D}^{\langle \mathrm{F},\mathrm{p5}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p6}}\rangle} + {D}^{\langle \mathrm{F},\mathrm{p6}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p1}}\rangle} + {D}^{\langle \mathrm{G},\mathrm{p1}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p2}}\rangle} + {D}^{\langle \mathrm{G},\mathrm{p2}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p3}}\rangle} + {D}^{\langle \mathrm{G},\mathrm{p3}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p4}}\rangle} + {D}^{\langle \mathrm{G},\mathrm{p4}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p5}}\rangle} + {D}^{\langle \mathrm{G},\mathrm{p5}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p6}}\rangle} + {D}^{\langle \mathrm{G},\mathrm{p6}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p1}}\rangle} + {D}^{\langle \mathrm{H},\mathrm{p1}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p2}}\rangle} + {D}^{\langle \mathrm{H},\mathrm{p2}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p3}}\rangle} + {D}^{\langle \mathrm{H},\mathrm{p3}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p4}}\rangle} + {D}^{\langle \mathrm{H},\mathrm{p4}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p5}}\rangle} + {D}^{\langle \mathrm{H},\mathrm{p5}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{d^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p6}}\rangle} + {D}^{\langle \mathrm{H},\mathrm{p6}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{l^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}}\rangle} + {L}^{\langle \mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{l^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}}\rangle} + {L}^{\langle \mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{l^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}}\rangle} + {L}^{\langle \mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{l^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}}\rangle} + {L}^{\langle \mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{l^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}}\rangle} + {L}^{\langle \mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{l^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}}\rangle} + {L}^{\langle \mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{l^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}}\rangle} + {L}^{\langle \mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{l^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}}\rangle} + {L}^{\langle \mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{A}}\rangle} + {X}^{\langle \mathrm{A},\mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{B}}\rangle} + {X}^{\langle \mathrm{A},\mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{C}}\rangle} + {X}^{\langle \mathrm{A},\mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{D}}\rangle} + {X}^{\langle \mathrm{A},\mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{E}}\rangle} + {X}^{\langle \mathrm{A},\mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{F}}\rangle} + {X}^{\langle \mathrm{A},\mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{G}}\rangle} + {X}^{\langle \mathrm{A},\mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{H}}\rangle} + {X}^{\langle \mathrm{A},\mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{A}}\rangle} + {X}^{\langle \mathrm{B},\mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{B}}\rangle} + {X}^{\langle \mathrm{B},\mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{C}}\rangle} + {X}^{\langle \mathrm{B},\mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{D}}\rangle} + {X}^{\langle \mathrm{B},\mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{E}}\rangle} + {X}^{\langle \mathrm{B},\mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{F}}\rangle} + {X}^{\langle \mathrm{B},\mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{G}}\rangle} + {X}^{\langle \mathrm{B},\mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{H}}\rangle} + {X}^{\langle \mathrm{B},\mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{A}}\rangle} + {X}^{\langle \mathrm{C},\mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{B}}\rangle} + {X}^{\langle \mathrm{C},\mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{C}}\rangle} + {X}^{\langle \mathrm{C},\mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{D}}\rangle} + {X}^{\langle \mathrm{C},\mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{E}}\rangle} + {X}^{\langle \mathrm{C},\mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{F}}\rangle} + {X}^{\langle \mathrm{C},\mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{G}}\rangle} + {X}^{\langle \mathrm{C},\mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{H}}\rangle} + {X}^{\langle \mathrm{C},\mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{A}}\rangle} + {X}^{\langle \mathrm{D},\mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{B}}\rangle} + {X}^{\langle \mathrm{D},\mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{C}}\rangle} + {X}^{\langle \mathrm{D},\mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{D}}\rangle} + {X}^{\langle \mathrm{D},\mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{E}}\rangle} + {X}^{\langle \mathrm{D},\mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{F}}\rangle} + {X}^{\langle \mathrm{D},\mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{G}}\rangle} + {X}^{\langle \mathrm{D},\mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{H}}\rangle} + {X}^{\langle \mathrm{D},\mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{A}}\rangle} + {X}^{\langle \mathrm{E},\mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{B}}\rangle} + {X}^{\langle \mathrm{E},\mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{C}}\rangle} + {X}^{\langle \mathrm{E},\mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{D}}\rangle} + {X}^{\langle \mathrm{E},\mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{E}}\rangle} + {X}^{\langle \mathrm{E},\mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{F}}\rangle} + {X}^{\langle \mathrm{E},\mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{G}}\rangle} + {X}^{\langle \mathrm{E},\mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{H}}\rangle} + {X}^{\langle \mathrm{E},\mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{A}}\rangle} + {X}^{\langle \mathrm{F},\mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{B}}\rangle} + {X}^{\langle \mathrm{F},\mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{C}}\rangle} + {X}^{\langle \mathrm{F},\mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{D}}\rangle} + {X}^{\langle \mathrm{F},\mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{E}}\rangle} + {X}^{\langle \mathrm{F},\mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{F}}\rangle} + {X}^{\langle \mathrm{F},\mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{G}}\rangle} + {X}^{\langle \mathrm{F},\mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{H}}\rangle} + {X}^{\langle \mathrm{F},\mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{A}}\rangle} + {X}^{\langle \mathrm{G},\mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{B}}\rangle} + {X}^{\langle \mathrm{G},\mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{C}}\rangle} + {X}^{\langle \mathrm{G},\mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{D}}\rangle} + {X}^{\langle \mathrm{G},\mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{E}}\rangle} + {X}^{\langle \mathrm{G},\mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{F}}\rangle} + {X}^{\langle \mathrm{G},\mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{G}}\rangle} + {X}^{\langle \mathrm{G},\mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{H}}\rangle} + {X}^{\langle \mathrm{G},\mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{A}}\rangle} + {X}^{\langle \mathrm{H},\mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{B}}\rangle} + {X}^{\langle \mathrm{H},\mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{C}}\rangle} + {X}^{\langle \mathrm{H},\mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{D}}\rangle} + {X}^{\langle \mathrm{H},\mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{E}}\rangle} + {X}^{\langle \mathrm{H},\mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{F}}\rangle} + {X}^{\langle \mathrm{H},\mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{G}}\rangle} + {X}^{\langle \mathrm{H},\mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{x^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{H}}\rangle} + {X}^{\langle \mathrm{H},\mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{y^{\mathrm{data}}}^{\langle \mathrm{\mathrm{A}}\rangle} + {Y}^{\langle \mathrm{A}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{y^{\mathrm{data}}}^{\langle \mathrm{\mathrm{B}}\rangle} + {Y}^{\langle \mathrm{B}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{y^{\mathrm{data}}}^{\langle \mathrm{\mathrm{C}}\rangle} + {Y}^{\langle \mathrm{C}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{y^{\mathrm{data}}}^{\langle \mathrm{\mathrm{D}}\rangle} + {Y}^{\langle \mathrm{D}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{y^{\mathrm{data}}}^{\langle \mathrm{\mathrm{E}}\rangle} + {Y}^{\langle \mathrm{E}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{y^{\mathrm{data}}}^{\langle \mathrm{\mathrm{F}}\rangle} + {Y}^{\langle \mathrm{F}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{y^{\mathrm{data}}}^{\langle \mathrm{\mathrm{G}}\rangle} + {Y}^{\langle \mathrm{G}\rangle} = 0
+\end{equation}
+\begin{equation}
+-{y^{\mathrm{data}}}^{\langle \mathrm{\mathrm{H}}\rangle} + {Y}^{\langle \mathrm{H}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {\pi^{\mathrm{h}}}^{\langle \mathrm{\mathrm{p1}}\rangle} + {\pi^{\mathrm{h}}}^{\langle \mathrm{\mathrm{p2}}\rangle} + {\pi^{\mathrm{h}}}^{\langle \mathrm{\mathrm{p3}}\rangle} + {\pi^{\mathrm{h}}}^{\langle \mathrm{\mathrm{p4}}\rangle} + {\pi^{\mathrm{h}}}^{\langle \mathrm{\mathrm{p5}}\rangle} + {\pi^{\mathrm{h}}}^{\langle \mathrm{\mathrm{p6}}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {{\alpha}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{p1}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p1}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p1}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p1}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p1}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p1}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p1}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p1}}\rangle}}^{\omega} = 0
+\end{equation}
+\begin{equation}
+-1 + {{\alpha}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{p2}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p2}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p2}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p2}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p2}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p2}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p2}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p2}}\rangle}}^{\omega} = 0
+\end{equation}
+\begin{equation}
+-1 + {{\alpha}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{p3}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p3}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p3}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p3}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p3}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p3}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p3}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p3}}\rangle}}^{\omega} = 0
+\end{equation}
+\begin{equation}
+-1 + {{\alpha}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{p4}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p4}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p4}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p4}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p4}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p4}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p4}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p4}}\rangle}}^{\omega} = 0
+\end{equation}
+\begin{equation}
+-1 + {{\alpha}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{p5}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p5}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p5}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p5}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p5}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p5}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p5}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p5}}\rangle}}^{\omega} = 0
+\end{equation}
+\begin{equation}
+-1 + {{\alpha}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{p6}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{p6}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{p6}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{p6}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{p6}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{p6}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{p6}}\rangle}}^{\omega} + {{\alpha}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{p6}}\rangle}}^{\omega} = 0
+\end{equation}
+\begin{equation}
+-1 + {\beta^{\mathrm{k}}}^{\langle \mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{l}}}^{\langle \mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{A}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{A}}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {\beta^{\mathrm{k}}}^{\langle \mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{l}}}^{\langle \mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{B}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{B}}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {\beta^{\mathrm{k}}}^{\langle \mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{l}}}^{\langle \mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{C}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{C}}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {\beta^{\mathrm{k}}}^{\langle \mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{l}}}^{\langle \mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{D}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{D}}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {\beta^{\mathrm{k}}}^{\langle \mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{l}}}^{\langle \mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{E}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{E}}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {\beta^{\mathrm{k}}}^{\langle \mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{l}}}^{\langle \mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{F}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{F}}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {\beta^{\mathrm{k}}}^{\langle \mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{l}}}^{\langle \mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{G}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{G}}\rangle} = 0
+\end{equation}
+\begin{equation}
+-1 + {\beta^{\mathrm{k}}}^{\langle \mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{l}}}^{\langle \mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{A}},\mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{B}},\mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{C}},\mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{D}},\mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{E}},\mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{F}},\mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{G}},\mathrm{\mathrm{H}}\rangle} + {\beta^{\mathrm{x}}}^{\langle \mathrm{\mathrm{H}},\mathrm{\mathrm{H}}\rangle} = 0
+\end{equation}
+
+
+
+
+

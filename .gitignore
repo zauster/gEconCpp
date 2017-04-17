@@ -7,3 +7,9 @@ test/*.test
 test/*.tex
 test/*.log
 test/*.R
+/.cproject
+/.project
+/.settings/language.settings.xml
+/GPATH
+/GRTAGS
+/GTAGS

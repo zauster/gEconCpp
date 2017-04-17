@@ -100,7 +100,7 @@ model_parse(const char *fname)
     model_obj.clear();
     std::string name(fname), mod_name;
 
-    write_info(gecon_hello_str());
+    // write_info(gecon_hello_str());
     mod_name = get_mod_name(name);
     if (!mod_name.size()) {
         report_errors("(gEcon error): invalid model file name or extension: \'" + name + "\'");
