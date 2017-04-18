@@ -167,6 +167,9 @@ report it (with the .gcn file that caused this message) to " + gecon_bug_str()))
         report_errors(mes);
     }
 
+#ifdef DEBUG
+    std::cout << " => Begin parsing the model ..." << std::endl;
+#endif
     try {
         model_obj.do_it();
     }
@@ -196,7 +199,10 @@ report it (with the .gcn file that caused this message) to " + gecon_bug_str()))
         model_obj.clear();
         report_errors(mes);
     }
-
+#ifdef DEBUG
+    std::cout << " => Finished!" << std::endl;
+#endif
+    
     model_obj.write();
     model_obj.clear();
 }

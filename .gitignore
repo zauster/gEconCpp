@@ -14,3 +14,4 @@ test/*.R
 /GRTAGS
 /GTAGS
 /callgraph*
+/test/cge_nestedCES/

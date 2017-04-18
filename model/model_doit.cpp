@@ -21,6 +21,26 @@
 #include <ctime>
 #include <climits>
 
+#ifdef DEBUG
+#include <sys/time.h>
+
+void startTimer(timeval *timer){
+    gettimeofday(timer, NULL);
+}
+
+int stopTimer(timeval *timer){
+    timeval tmp;
+    gettimeofday(&tmp, NULL);
+    tmp.tv_sec -= timer->tv_sec;
+    tmp.tv_usec -= timer->tv_usec;
+    if (tmp.tv_usec < 0){
+        tmp.tv_usec+=1000000;
+        tmp.tv_sec--;
+    }
+    return int(tmp.tv_usec + tmp.tv_sec*1000000);
+}
+#endif
+
 using symbolic::internal::num2str;
 using symbolic::internal::print_flag;
 using symbolic::internal::DEFAULT;
@@ -32,12 +52,20 @@ using symbolic::internal::DIFF_T;
 using symbolic::internal::LEAD_T;
 using symbolic::triplet;
 
+// former DEBUG_INFO function
+// #define DEBUG_INFO(x) std::cerr << "DEBUG INFO: " << (x) << '\n';
+
+
 #define INTERNAL_ERROR throw(std::runtime_error(std::string("internal error in file ") +\
                              __FILE__ + ", line " + symbolic::internal::num2str(__LINE__)));
 #ifdef DEBUG
-#define DEBUG_INFO(x) std::cerr << "DEBUG INFO: " << (x) << '\n';
+#define DEBUG_INFO_FIRST(x) std::cout << "   -> " << (x) << ": "; startTimer(&timer);
+#define DEBUG_INFO(x) std::cout << stopTimer(&timer) << std::endl << "   -> " << (x) << ": "; startTimer(&timer);
+#define DEBUG_INFO_LAST() std::cout << stopTimer(&timer) << std::endl;
 #else
+#define DEBUG_INFO_FIRST(x)
 #define DEBUG_INFO(x)
+#define DEBUG_INFO_LAST()
 #endif
 
 
@@ -60,8 +88,14 @@ num_name_str(int n, const std::string &name)
 void
 Model::do_it()
 {
-    DEBUG_INFO("preliminary check")
+    
+#ifdef DEBUG
+    timeval timer;
+#endif
+    
+    DEBUG_INFO_FIRST("preliminary check")
     terminate_on_errors();
+
     DEBUG_INFO("checking options")
     check_options();
     if (m_options[verbose]) {
@@ -71,33 +105,44 @@ Model::do_it()
             mes += ", " + m_blocks[i].m_name;
         write_model_info(mes);
     }
+
     DEBUG_INFO("checking indices")
     check_indices();
     check_findices();
     terminate_on_errors();
+
     DEBUG_INFO("checking definitions")
     check_defs();
     terminate_on_errors();
+
     DEBUG_INFO("checking names in blocks before definition substitution")
     check_names();
     terminate_on_errors();
+
     DEBUG_INFO("substituting definitions")
     subst_defs();
+
     DEBUG_INFO("checking if model is deterministic")
     check_deter();
+
     DEBUG_INFO("checking Lagrange multipliers")
     check_lagr();
+
     DEBUG_INFO("checking references")
     check_refs();
     terminate_on_errors();
+
     DEBUG_INFO("checking objective functions and controls")
     check_obj_contr();
     terminate_on_errors();
+
     DEBUG_INFO("checking / handling leads")
     leads();
     terminate_on_errors();
+
     DEBUG_INFO("checking / handling lags")
     lags();
+
     DEBUG_INFO("checking if model is static")
     check_static();
     terminate_on_errors();
@@ -113,15 +158,20 @@ Model::do_it()
         }
     }
     terminate_on_errors();
+
     DEBUG_INFO("deriving FOCs")
     derive_focs();
+
     DEBUG_INFO("collecting shocks")
     collect_shocks();
     terminate_on_errors();
+
     DEBUG_INFO("collecting variables and parameters")
     collect_vp();
+
     DEBUG_INFO("collecting model equations")
     collect_eq();
+
     DEBUG_INFO("collecting calibration equations")
     collect_calibr();
     terminate_on_errors();
@@ -137,6 +187,7 @@ Model::do_it()
                          + num_name_str(m_params_calibr.size(),
                                         "non-free (calibrated) parameter"));
     }
+
     DEBUG_INFO("reducing model equations")
     check_red_vars();
     terminate_on_errors();
@@ -148,16 +199,21 @@ Model::do_it()
                          + " with " + num_name_str(m_vars.size(),
                                                    "variable"));
     }
+
     DEBUG_INFO("constructing variables / equations equations map")
     var_eq_map();
+
     DEBUG_INFO("constructing shocks / equations map")
     shock_eq_map();
     terminate_on_errors();
+
     DEBUG_INFO("determining steady state equations")
     stst();
     terminate_on_errors();
+
     DEBUG_INFO("constructing variables / calibrating equations map")
     var_ceq_map();
+
     DEBUG_INFO("constructing parameter / equations, calibrating equations maps")
     par_eq_map();
     par_ceq_map();
@@ -165,8 +221,11 @@ Model::do_it()
         DEBUG_INFO("determining steady state equations Jacobian")
         ss_jacob();
     }
+
     DEBUG_INFO("differentiating equations for the 1st order perturbation")
     diff_eqs();
+
+    DEBUG_INFO_LAST()
 }
 
 
@@ -2093,6 +2152,3 @@ Model::diff_eqs()
         }
     }
 }
-
-
-

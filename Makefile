@@ -156,13 +156,13 @@ all: link
 
 .cpp.o:
 	@echo "making $@ from $<"
-	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) -I/usr/include -L/usr/lib/ -c $< -o $@
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) -DDEBUG -I/usr/include -L/usr/lib/ -c $< -o $@
 
 .f.o:
 	$(F77) $(ALL_FFLAGS)  $(PKG_LIBS) -c $< -o $@
 
 link: $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $(exename)  -L/usr/lib/ $(ALL_CXXFLAGS) $(MAIN_LDFLAGS) $(LDFLAGS) $(PKG_LIBS)
+	$(CXX) $(OBJECTS) -o $(exename) -DDEBUG  -L/usr/lib/ $(ALL_CXXFLAGS) $(MAIN_LDFLAGS) $(LDFLAGS) $(PKG_LIBS)
 
 clean:
 	-@rm $(OBJECTS)
