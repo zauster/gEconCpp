@@ -57,28 +57,28 @@ $(PREFIX)/model/model.o \
 $(PREFIX)/model/model_doit.o \
 $(PREFIX)/model/model_write.o
 
-OBJECTS_QZ = \
-$(PREFIX)/qz/zgges_interface.o \
-$(PREFIX)/qz/lapack/zunmqr.o \
-$(PREFIX)/qz/lapack/ztgsyl.o \
-$(PREFIX)/qz/lapack/ztgsy2.o \
-$(PREFIX)/qz/lapack/ztgsen.o \
-$(PREFIX)/qz/lapack/zlatdf.o \
-$(PREFIX)/qz/lapack/zhgeqz.o \
-$(PREFIX)/qz/lapack/zgghrd.o \
-$(PREFIX)/qz/lapack/zgesc2.o \
-$(PREFIX)/qz/lapack/zgetc2.o \
-$(PREFIX)/qz/lapack/ztgexc.o \
-$(PREFIX)/qz/lapack/ztgex2.o \
-$(PREFIX)/qz/lapack/zgges.o \
-$(PREFIX)/qz/lapack/zggbal.o \
-$(PREFIX)/qz/lapack/zggbak.o
+# OBJECTS_QZ = \
+# $(PREFIX)/qz/zgges_interface.o \
+# $(PREFIX)/qz/lapack/zunmqr.o \
+# $(PREFIX)/qz/lapack/ztgsyl.o \
+# $(PREFIX)/qz/lapack/ztgsy2.o \
+# $(PREFIX)/qz/lapack/ztgsen.o \
+# $(PREFIX)/qz/lapack/zlatdf.o \
+# $(PREFIX)/qz/lapack/zhgeqz.o \
+# $(PREFIX)/qz/lapack/zgghrd.o \
+# $(PREFIX)/qz/lapack/zgesc2.o \
+# $(PREFIX)/qz/lapack/zgetc2.o \
+# $(PREFIX)/qz/lapack/ztgexc.o \
+# $(PREFIX)/qz/lapack/ztgex2.o \
+# $(PREFIX)/qz/lapack/zgges.o \
+# $(PREFIX)/qz/lapack/zggbal.o \
+# $(PREFIX)/qz/lapack/zggbak.o
 
 ALL_INCLUDES = $(INCLUDE_GECON) $(INCLUDE_SYMBOLIC) \
 $(INCLUDE_PARSER) $(INCLUDE_MODEL)
 
 OBJECTS = $(OBJECTS_GECON) $(OBJECTS_SYMBOLIC) \
-$(OBJECTS_PARSER) $(OBJECTS_MODEL) $(OBJECTS_QZ)
+$(OBJECTS_PARSER) $(OBJECTS_MODEL) # $(OBJECTS_QZ)
 
 #
 # General Settings
