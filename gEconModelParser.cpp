@@ -1,5 +1,4 @@
 
-// #include "parser/model_parse.h"
 #include <model_parse.h>
 #include <iostream>
 
@@ -10,7 +9,7 @@ int main(int argc, char **argv) {
     filename = argv[1];
   }
 
-  std::cout << "Given filename: " << filename << std::endl;
+  // std::cout << "Given filename: " << filename << std::endl;
 
   model_parse(filename);
 

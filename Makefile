@@ -1,19 +1,18 @@
-
 #
 # Most of this is copied from the
-# - Makevars files and the 
+# - Makevars files and the
 # - R Makeconf in /usr/lib64/R/make
 
 PREFIX =.
 
 #
 # Set all objects that have to be compiled
-# 
+#
 
 INCLUDE_GECON = -I$(PREFIX)
 OBJECTS_GECON = \
 $(PREFIX)/gecon_info.o \
-$(PREFIX)/modelparser.o
+$(PREFIX)/gEconModelParser.o
 
 INCLUDE_SYMBOLIC = -I$(PREFIX)/symbolic
 OBJECTS_SYMBOLIC = \
@@ -75,8 +74,6 @@ $(PREFIX)/qz/lapack/zgges.o \
 $(PREFIX)/qz/lapack/zggbal.o \
 $(PREFIX)/qz/lapack/zggbak.o
 
-
-
 ALL_INCLUDES = $(INCLUDE_GECON) $(INCLUDE_SYMBOLIC) \
 $(INCLUDE_PARSER) $(INCLUDE_MODEL)
 
@@ -85,8 +82,10 @@ $(OBJECTS_PARSER) $(OBJECTS_MODEL) $(OBJECTS_QZ)
 
 #
 # General Settings
-# 
+#
 
+exename = gEconModelParser
+TEST1 = test/cge_calibr_iosam/cge_calibr_iosam.
 BLAS_LIBS = -lblas
 
 # C/C++
@@ -163,21 +162,26 @@ all: link
 	$(F77) $(ALL_FFLAGS)  $(PKG_LIBS) -c $< -o $@
 
 link: $(OBJECTS)
-	$(CXX) $(OBJECTS) -o gEconModelParser  -L/usr/lib/ $(ALL_CXXFLAGS) $(MAIN_LDFLAGS) $(LDFLAGS) $(PKG_LIBS)
+	$(CXX) $(OBJECTS) -o $(exename)  -L/usr/lib/ $(ALL_CXXFLAGS) $(MAIN_LDFLAGS) $(LDFLAGS) $(PKG_LIBS)
 
 clean:
 	-@rm $(OBJECTS)
 
-test: gEconModelParser
-	@./gEconModelParser test/cge_calibr_iosam.gcn
-	tail -n +2 test/cge_calibr_iosam.model.tex > test/cge_calibr_iosam.model.tex.test
-	diff test/cge_calibr_iosam.model.tex.test test/cge_calibr_iosam.model.tex.true
-	tail -n +2 test/cge_calibr_iosam.model.log > test/cge_calibr_iosam.model.log.test
-	diff test/cge_calibr_iosam.model.log.test test/cge_calibr_iosam.model.log.true
-	tail -n +9 test/cge_calibr_iosam.model.R > test/cge_calibr_iosam.model.R.test
-	diff test/cge_calibr_iosam.model.R.test test/cge_calibr_iosam.model.R.true
-	tail -n +2 test/cge_calibr_iosam.results.tex > test/cge_calibr_iosam.results.tex.test
-	diff test/cge_calibr_iosam.results.tex.test test/cge_calibr_iosam.results.tex.true
+test: $(exename)
+	@./$(exename) $(TEST1)gcn
+	tail -n +2 $(TEST1)model.tex > $(TEST1)model.tex.test
+	diff $(TEST1)model.tex.test $(TEST1)model.tex.true
+	tail -n +2 $(TEST1)model.log > $(TEST1)model.log.test
+	diff $(TEST1)model.log.test $(TEST1)model.log.true
+	tail -n +9 $(TEST1)model.R > $(TEST1)model.R.test
+	diff $(TEST1)model.R.test $(TEST1)model.R.true
+	tail -n +2 $(TEST1)results.tex > $(TEST1)results.tex.test
+	diff $(TEST1)results.tex.test $(TEST1)results.tex.true
 
-# tail -n +2 test/cge_calibr_iosam.tex > test/cge_calibr_iosam.tex.test
-# diff test/cge_calibr_iosam.tex.test test/cge_calibr_iosam.tex.true
+callgraph: $(exename)
+	clang++ -S -emit-llvm gEconModelParser.cpp $(ALL_INCLUDES) $(ALL_CXXFLAGS) $(MAIN_LDFLAGS) $(LDFLAGS) $(PKG_LIBS) -o - | opt -analyze -dot-callgraph
+	cat callgraph.dot | c++filt -n > callgraph
+	dot -Tpdf -o callgraph.pdf callgraph
+
+
+# clang++ -S -emit-llvm $(OBJECTS) $(ALL_INCLUDES) $(ALL_CXXFLAGS) $(MAIN_LDFLAGS) $(LDFLAGS) $(PKG_LIBS) -o - | opt -analyze -dot-callgraph
